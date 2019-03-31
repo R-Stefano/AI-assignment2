@@ -22,7 +22,7 @@ class Puzzle:
         self.hole = hole_location if hole_location is not None else self.board.index(Puzzle.HOLE)
         self.width =width if width is not None else len(board)
         self.num_values=self.width*self.width
-        self.scoretype='placed'
+        self.scoretype='manhattan'
 
     @property
     def solved(self):

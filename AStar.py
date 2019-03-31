@@ -1,6 +1,6 @@
 import queue as q
 from collections import namedtuple
-
+max_iterations=1000000
 def search(start):
     """ 
     Performs A* search starting with the initialized puzzle board. 
@@ -31,7 +31,7 @@ def search(start):
     frontier_set = {node}
     #contains the board states already explored
     explored_states = set()
-    while True:
+    for ite in range(max_iterations+1):#while True:
         #Retrieve the node in the frontier with lowest value
         node = frontier.get()[1]
 
@@ -39,7 +39,7 @@ def search(start):
         state = node.state
 
         #Check if the game has ben solved
-        if state.solved:
+        if state.solved or ite==max_iterations:
             Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth')
             return Result(state, node.depth, len(frontier_set), max(no.depth for no in frontier_set))
 

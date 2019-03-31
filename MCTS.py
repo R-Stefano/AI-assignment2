@@ -5,6 +5,8 @@ from collections import namedtuple
 import matplotlib.pyplot as plt
 num_rollouts=100
 type_estimate='avg_value'
+max_iterations=1000000
+
 class UCTNode():
     def __init__(self, board, parent=None, prior=0):
         self.board = board
@@ -51,11 +53,11 @@ class UCTNode():
 def search(board):
     root = UCTNode(board)
     num_nodes=0
-    while True:
+    for ite in range(max_iterations+1):#while True:
         num_nodes+=1
         print('nodes expanded', num_nodes)
         leaf = root.select_leaf()
-        if leaf.board.solved:
+        if leaf.board.solved or ite==max_iterations:
             #obtain the depth of the selected node
             depth=0
             buf_leaf=leaf

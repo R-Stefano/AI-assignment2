@@ -1,5 +1,6 @@
 from collections import deque, namedtuple
 
+max_iterations=1000000
 def search(board):
     """ 
     Performs breadth-first search starting with the 'start' as the beginning
@@ -20,7 +21,7 @@ def search(board):
     frontier_set = {node}
     #contains the board states already explored, useless add them to the frontier again
     explored_state = set()
-    while True:
+    for ite in range(max_iterations+1):#while True:
         # current position is the first position in the frontier
         node = frontier.popleft()
 
@@ -28,7 +29,7 @@ def search(board):
         board = node.board
 
         # goal test: return success if True
-        if board.solved:
+        if board.solved or ite==max_iterations:
             Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth')
             return Result(board, node.depth, len(frontier_set), max(no.depth for no in frontier_set))
 

@@ -34,14 +34,6 @@ if __name__ == '__main__':
               [20,21,22,23,24]]
 
     boards=[board3, board4, board5]
-    '''
-                placed manhattan
-    avg_value   8        8
-    rollouts    20      26
-    '''
-    #HJERE TESTING THE NEW ALGORITHMS 
-    mcts.search(Puzzle(board3).shuffle())
-    print('finished')
 
     inputBoards=[]
     for b in boards:
