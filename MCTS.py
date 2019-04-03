@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 num_rollouts=100
 type_estimate='avg_value'
 max_iterations=1000000
-
+import time
 class UCTNode():
     def __init__(self, board, parent=None, prior=0):
         self.board = board
@@ -53,6 +53,7 @@ class UCTNode():
 def search(board):
     root = UCTNode(board)
     num_nodes=0
+    start=time.time()
     for ite in range(max_iterations+1):#while True:
         num_nodes+=1
         print('nodes expanded', num_nodes)
@@ -69,6 +70,10 @@ def search(board):
             print('<<ATTENTION>> Max depth is not the real one, it uses the solved node depth')
             return Result(leaf.board, depth, num_nodes, depth)
 
+        if num_nodes==1000:
+            end=time.time()
+            print(end-start)
+            break
         #compute probability to select each child node. (They are all equal probable)
         num_moves=[1 for mov in leaf.board.possible_moves]
         child_priors=[1/len(num_moves) for mov in leaf.board.possible_moves]

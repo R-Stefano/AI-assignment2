@@ -35,6 +35,8 @@ if __name__ == '__main__':
 
     boards=[board3, board4, board5]
 
+    mcts.search(Puzzle(board3).shuffle())
+    '''
     inputBoards=[]
     for b in boards:
         board_shuffles=[]
@@ -65,5 +67,5 @@ if __name__ == '__main__':
             results[algo]['nodesExpanded'].append(np.mean(algo_epoch['nodesExpanded']))
             results[algo]['max_depth'].append(np.mean(algo_epoch['max_depth']))
             results[algo]['time'].append(np.mean(algo_epoch['time']))
-    
+    '''
     utils.displayResults(results)
