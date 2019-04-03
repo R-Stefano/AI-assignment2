@@ -8,6 +8,7 @@ num_rollouts=100
 type_estimate='avg_value'
 max_iterations=1000000
 max_childs=4
+import time
 class UCTNode():
     def __init__(self, board, move, parent=None):
         self.board = board
@@ -46,7 +47,7 @@ class UCTNode():
             self.child_priors / (1 + self.child_number_visits))
 
     def best_child(self):
-        print('node',str(self)[-14:],'childs values', self.child_Q() + self.child_U())
+        #print('node',str(self)[-14:],'childs values', self.child_Q() + self.child_U())
         return np.argmin(self.child_Q() + self.child_U())
     '''
     def Q(self):  # returns float
@@ -66,7 +67,7 @@ class UCTNode():
         while current.is_expanded:
             best_move_idx = current.best_child()
             #convert idx move to move
-            print('available moves', [mov for mov in current.board.possible_moves])
+            #print('available moves', [mov for mov in current.board.possible_moves])
             best_move=[mov for mov in current.board.possible_moves][best_move_idx]
             current=current.maybe_add_child(best_move, best_move_idx)
         return current
@@ -99,10 +100,12 @@ class DummyNode(object):
 def search(board):
     root = UCTNode(board, move=None, parent=DummyNode())
     num_nodes=0 #store the number of nodes explored
+    start=time.time()
     for ite in range(max_iterations+1):#while True:
         num_nodes+=1
-        print('\nnodes expanded', num_nodes)
-        print('root node obj:',str(root)[-14:])
+        print(num_nodes)
+        #print('\nnodes expanded', num_nodes)
+        #print('root node obj:',str(root)[-14:])
         leaf = root.select_leaf()
         '''
         the problem is that i defined the best action as the one with min value
@@ -126,8 +129,13 @@ def search(board):
         otherwise:
             keep it
         '''
-        print('exploring leaf node', leaf)
-        print('lead node board:\n',leaf.board)
+        #print('exploring leaf node', leaf)
+        #print('lead node board:\n',leaf.board)
+
+        if num_nodes==1000:
+            end=time.time()
+            print(end-start)
+            break
 
 
         #if solved of reached limit explored nodes
