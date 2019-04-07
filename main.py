@@ -44,7 +44,6 @@ if __name__ == '__main__':
 
     algos={'BFS':bfs, 'AStar':astar, 'MCTS': mcts}
     results={'BFS':copy.deepcopy(dataStruc), 'AStar':copy.deepcopy(dataStruc), 'MCTS':copy.deepcopy(dataStruc)}
-
     for algo in algos:
         print(algo)
         for i,board in enumerate(boards):
@@ -65,4 +64,5 @@ if __name__ == '__main__':
             results[algo]['nodesExpanded'].append(np.mean(algo_epoch['nodesExpanded']))
             results[algo]['max_depth'].append(np.mean(algo_epoch['max_depth']))
             results[algo]['time'].append(np.mean(algo_epoch['time']))
+
     utils.displayResults(results)

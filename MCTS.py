@@ -53,7 +53,6 @@ def search(board):
     max_depth=0
     for ite in range(max_iterations+1):#while True:
         num_nodes+=1
-        print(num_nodes)
         leaf = root.select_leaf()
 
         #check if new max depth
