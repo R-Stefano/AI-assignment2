@@ -40,4 +40,5 @@ def displayResults(results):
     axs[1,1].legend(loc=0)
 
     plt.subplots_adjust(hspace=0.4)
+    plt.savefig('result.png')
     plt.show()

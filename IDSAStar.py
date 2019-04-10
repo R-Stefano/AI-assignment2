@@ -3,8 +3,8 @@ from collections import deque, namedtuple
 max_iterations=1000000
 def search(board):
     """ 
-    Performs breadth-first search starting with the 'start' as the beginning
-    node. Returns a namedtuple 'Success' which contains namedtuple 'position'
+    Performs Iterative Deepening A* search. It is a variation of DFS using an heuristic function 
+    to cut the search of a node if the cost exceeds a given threshold. Returns a namedtuple 'Success' which contains namedtuple 'position'
     (includes: node, cost, depth, prev), 'max_depth' and 'nodes_expanded'
     if a node that passes the goal test has been found.
 

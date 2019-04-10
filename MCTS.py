@@ -49,10 +49,8 @@ class UCTNode():
         
 def search(board):
     root = UCTNode(board, 0)
-    num_nodes=0
     max_depth=0
-    for ite in range(max_iterations+1):#while True:
-        num_nodes+=1
+    for ite in range(1,max_iterations+2):#while True:
         leaf = root.select_leaf()
 
         #check if new max depth
@@ -63,7 +61,7 @@ def search(board):
             print('solved!')
             #return the result
             Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth')
-            return Result(leaf.board, leaf.depth, num_nodes, max_depth)
+            return Result(leaf.board, leaf.depth, ite, max_depth)
 
         #create the child board positions
         childs=[leaf.board.move(mov) for mov in leaf.board.possible_moves]
