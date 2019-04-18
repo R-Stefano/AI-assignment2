@@ -60,8 +60,8 @@ def search(board):
         if leaf.board.solved or ite==max_iterations:
             print('solved!')
             #return the result
-            Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth')
-            return Result(leaf.board, leaf.depth, ite, max_depth)
+            Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth, isSolved')
+            return Result(leaf.board, leaf.depth, ite, max_depth, leaf.board.solved)
 
         #create the child board positions
         childs=[leaf.board.move(mov) for mov in leaf.board.possible_moves]

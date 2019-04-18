@@ -15,7 +15,8 @@ dataStruc={
             'depths':[],
             'nodesExpanded': [],
             'max_depth': [],
-            'time':[]
+            'time':[],
+            'isSolved': []
           }
 if __name__ == '__main__':    
     board3 = [[1,2,3],
@@ -59,10 +60,13 @@ if __name__ == '__main__':
                 algo_epoch['nodesExpanded'].append(res.nodesExpanded)
                 algo_epoch['max_depth'].append(res.max_depth)
                 algo_epoch['time'].append((end - start))
+                algo_epoch['isSolved'].append(res.isSolved)
 
             results[algo]['depths'].append(np.mean(algo_epoch['depths']))
             results[algo]['nodesExpanded'].append(np.mean(algo_epoch['nodesExpanded']))
             results[algo]['max_depth'].append(np.mean(algo_epoch['max_depth']))
             results[algo]['time'].append(np.mean(algo_epoch['time']))
+            results[algo]['isSolved'].append(algo_epoch['isSolved'])
 
+    print(results)
     utils.displayResults(results)

@@ -40,8 +40,8 @@ def search(start):
 
         #Check if the game has ben solved
         if state.solved or ite==max_iterations:
-            Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth')
-            return Result(state, node.depth, ite, max(no.depth for no in frontier_set))
+            Result = namedtuple('Result', 'board, depth, nodesExpanded, max_depth, isSolved')
+            return Result(state, node.depth, ite, max(no.depth for no in frontier_set), state.solved)
 
         # expanded nodes are added to explored set
         explored_states.add(state)

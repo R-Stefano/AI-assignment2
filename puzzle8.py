@@ -13,7 +13,6 @@ class Puzzle:
     '''
     possible values:
         placed
-        orderedPlaced
         manhattan
     '''
     def __init__(self, board, hole_location=None, width=None):
@@ -69,18 +68,13 @@ class Puzzle:
     @property 
     def score(self):
         #Higher number means more far away from the goal
-        if self.scoretype=='orderedPlaced':
-            pairs=[i==j for i, j in zip(range(1, (self.num_values+1)), self.board)]
-            for i, value in enumerate(pairs):
-                if not(value):
-                    return ((self.num_values-1)-i)
-        elif self.scoretype=='placed':
+        if self.scoretype=='placed':
             return ((self.num_values-1)-[i==j for i, j in zip(range(1, self.num_values+1), self.board)].count(True))
         elif self.scoretype=='manhattan':
-            #goal = [1, 2, 3, 8, 0, 4, 7, 6, 5]
+            #goal = [1, 2, 3, 4, 5, 6, 7, 8, ..., 0]
             goal = [i for i in range(1, self.num_values)]
             goal.append(0)
-            return sum(abs(b%3 - g%3) + abs(b//3 - g//3) for b, g in ((self.board.index(i), goal.index(i)) for i in range(1, self.num_values)))
+            return sum(abs(b%self.width - g%self.width) + abs(b//self.width - g//self.width) for b, g in ((self.board.index(i), goal.index(i)) for i in range(1, self.num_values)))
 
 
     def shuffle(self, moves=1000):
